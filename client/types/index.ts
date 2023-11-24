@@ -36,7 +36,7 @@ export interface ErrorResponse {
     errors: Record<string, string[]>;
 }
 
-export interface PaginatedResponse {
+export interface PaginatedResponse<T> {
     current_page: number;
     data: T[];
     first_page_url: string | null;
