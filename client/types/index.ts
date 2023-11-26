@@ -22,11 +22,16 @@ export interface RegisterPayload {
     password_comfirmation: string;
 }
 
-
-export interface Link {
+export interface RawLink {
+    id: number;
     short_link: string;
     full_link: string;
     views: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Link extends Omit<RawLink, "created_at" | "updated_at"> {
     created_at: Date;
     updated_at: Date;
 }
