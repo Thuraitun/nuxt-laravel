@@ -8,7 +8,7 @@ const queries = ref({
   ...useRoute().query,
 })
 
-const {data, index: getLinks} = useLinks({ queries })
+const {data, index: getLinks, destory} = useLinks({ queries })
 
 await getLinks();
 let links = computed(() => data.value?.data);
@@ -20,6 +20,13 @@ watch(queries, async () => useRouter().push({ query: queries.value }), {
 definePageMeta({
   middleware: ["auth"],
 })
+
+const handleDelete = async (id: number) => {
+  await destory(id)
+  if(data.value) {
+    data.value.data = data.value?.data.filter((link) => link.id !== id)
+  }
+}
 </script>
 <template>
   <div>
@@ -74,7 +81,7 @@ definePageMeta({
               /></NuxtLink>
             </td>
             <td>
-              <button><IconTrash /></button>
+              <button @click="handleDelete(link.id)"><IconTrash /></button>
             </td>
             <td></td>
           </tr>

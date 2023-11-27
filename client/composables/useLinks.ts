@@ -37,7 +37,7 @@ export const useLinks = ({ queries = ref({}) }: UseLinksOptions = {}) => {
 
     // find one link by id
     async function find(id: string | number) {
-        const  {data} = await axios.get<RawLink>(`/${slug}?${id}`);
+        const  {data} = await axios.get<RawLink>(`/${slug}/${id}`);
         return (item.value = adapter(data));
     }
 
@@ -49,7 +49,7 @@ export const useLinks = ({ queries = ref({}) }: UseLinksOptions = {}) => {
 
     // update an existing link
     async function update(id: string | number, payload: Partial<Link>) {
-        const {data} = await axios.put<RawLink>(`/${slug}?${id}`, payload);
+        const {data} = await axios.put<RawLink>(`/${slug}/${id}`, payload);
         return (item.value = adapter(data));
     }
 
